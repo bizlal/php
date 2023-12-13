@@ -7,7 +7,6 @@ session_start();
 
 function processCode()
 {
-
     // Create SDK instance
     $config = include('config.php');
     $dataService = DataService::Configure(array(
@@ -16,33 +15,33 @@ function processCode()
         'ClientSecret' =>  $config['client_secret'],
         'RedirectURI' => $config['oauth_redirect_uri'],
         'scope' => $config['oauth_scope'],
-        'baseUrl' => "https://php-seven-rho.vercel.app/callback"
+        'baseUrl' => "development"
     ));
 
     $OAuth2LoginHelper = $dataService->getOAuth2LoginHelper();
-    $parseUrl = parseAuthRedirectUrl(htmlspecialchars_decode($_SERVER['QUERY_STRING']));
+    $parseUrl = parseAuthRedirectUrl($_SERVER['QUERY_STRING']);
 
-    /*
-     * Update the OAuth2Token
-     */
-    $accessToken = $OAuth2LoginHelper->exchangeAuthorizationCodeForToken($parseUrl['code'], $parseUrl['realmId']);
-    $dataService->updateOAuth2Token($accessToken);
+    try {
+        $accessToken = $OAuth2LoginHelper->exchangeAuthorizationCodeForToken($parseUrl['code'], $parseUrl['realmId']);
+        $dataService->updateOAuth2Token($accessToken);
 
-    /*
-     * Setting the accessToken for session variable
-     */
-    $_SESSION['sessionAccessToken'] = $accessToken;
+        $_SESSION['sessionAccessToken'] = $accessToken;
+        // Redirect to a different page or show a success message
+    } catch (Exception $e) {
+        // Handle error
+        echo "Error: " . $e->getMessage();
+    }
 }
 
 function parseAuthRedirectUrl($url)
 {
-    parse_str($url,$qsArray);
+    parse_str($url, $qsArray);
     return array(
-        'code' => $qsArray['code'],
-        'realmId' => $qsArray['realmId']
+        'code' => $qsArray['code'] ?? null,
+        'realmId' => $qsArray['realmId'] ?? null
     );
 }
 
-$result = processCode();
+processCode();
 
 ?>

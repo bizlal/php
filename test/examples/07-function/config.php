@@ -5,6 +5,6 @@ return array(
     'client_id' => 'ABHMcSCef5OhmCR4i0oFdRyqddunDY2shw5d9bxxh4LQ7o7TTZ',
     'client_secret' => 'IvsnJh0jjjID8f3hm88adLOF7kb2lEAh575gdais',
     'oauth_scope' => 'com.intuit.quickbooks.accounting openid profile email phone address',
-    'oauth_redirect_uri' => 'https://php-b7r1z49oc-bilal-limelightio.vercel.app/callback',
+    'oauth_redirect_uri' => 'https://php-seven-rho.vercel.app/callback',
 )
 ?>

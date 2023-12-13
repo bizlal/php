@@ -15,7 +15,7 @@ function makeAPICall()
         'ClientSecret' =>  $config['client_secret'],
         'RedirectURI' => $config['oauth_redirect_uri'],
         'scope' => $config['oauth_scope'],
-        'baseUrl' => "development"
+        'baseUrl' => "php-seven-rho.vercel.app"
     ));
 
     // Retrieve the accessToken value from session variable

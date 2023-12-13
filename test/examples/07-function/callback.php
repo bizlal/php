@@ -16,7 +16,7 @@ function processCode()
         'ClientSecret' =>  $config['client_secret'],
         'RedirectURI' => $config['oauth_redirect_uri'],
         'scope' => $config['oauth_scope'],
-        'baseUrl' => "https://php-seven-rho.vercel.app/"
+        'baseUrl' => "https://php-seven-rho.vercel.app/callback"
     ));
 
     $OAuth2LoginHelper = $dataService->getOAuth2LoginHelper();
